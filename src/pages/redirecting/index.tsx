@@ -24,12 +24,19 @@ const Index = () => {
   const [error, setError] = useState(null);
   const [account, setAccount] = useState(0);
 
+  console.log({ getToken });
+
   useEffect(() => {
+    console.log("Effect running");
     const signInWithClerk = async () => {
+      console.log("Requesting token with template: integration_firebase");
       try {
+        console.log("Requesting token...");
         const firebaseToken = await getToken({
           template: "integration_firebase",
         });
+
+        console.log({ firebaseToken });
 
         if (!firebaseToken) {
           return;

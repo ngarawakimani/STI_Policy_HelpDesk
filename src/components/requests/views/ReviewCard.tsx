@@ -12,31 +12,34 @@ const ReviewCard = () => {
   const { userData } = useStepperContext();
   const { user } = useUser();
   const router = useRouter();
+  console.log(userData, "userData");
+  console.log(user, "user");
 
   const savetoDb = async () => {
     const docRef = await addDoc(collection(db, "submissions"), {
       request_title: userData.request_title,
       request_details: userData.request_details,
-      area_of_expertise: userData.area_of_expertise,
+      // area_of_expertise: userData.area_of_expertise || "", // Default to empty string
       sector_focus:
         userData.sector_focus === "Other"
           ? userData.other_sector_focus
           : userData.sector_focus,
       matched: false,
-      resources: userData.downloadUrls,
+      // resources: userData.downloadUrls,
       researcher_id: user?.id,
-      researcher_name: `${user?.firstName} ${user?.lastName}`,
-      researcher_profile: user?.profileImageUrl,
-      researcher_email: user?.primaryEmailAddress?.emailAddress,
+      // researcher_name: `${user?.firstName} ${user?.lastName}`,
+      // researcher_profile: user?.profileImageUrl,
+      // researcher_email: user?.primaryEmailAddress?.emailAddress,
     });
     console.log(docRef.id);
     router.push("/submissions");
   };
+
   return (
     <div className="top-6">
       <div className="mt-10 sm:mt-0">
         {" "}
-        <div className="mt-3 mb-1 px-5 text-2xl font-extrabold text-slate-900 sm:text-2xl">
+        <div className="mb-1 mt-3 px-5 text-2xl font-extrabold text-slate-900 sm:text-2xl">
           Review Submission
         </div>
         <div className="relative mx-5 items-center self-center overflow-hidden text-gray-600 focus-within:text-gray-400">
@@ -160,7 +163,7 @@ const ReviewCard = () => {
             <div className="bg-gray-50 px-4 text-right sm:px-6">
               <button
                 type="button"
-                className="mr-2 mb-2 w-full rounded-lg bg-gray-800 px-5 py-2.5 text-base font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300"
+                className="mb-2 mr-2 w-full rounded-lg bg-gray-800 px-5 py-2.5 text-base font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300"
                 onClick={() => {
                   savetoDb();
                 }}

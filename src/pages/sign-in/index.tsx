@@ -37,10 +37,10 @@ const Index = () => {
       <div className="flex h-screen items-center justify-center">
         {signedOut ? (
           <SignIn
-            // path="/sign-in"
-            // routing="path"
-            // signUpUrl="/sign-up"
-            // redirectUrl="/redirecting"
+            path="/sign-in"
+            routing="path"
+            signUpUrl="/sign-up"
+            redirectUrl="/redirecting"
             appearance={{
               elements: {
                 formButtonPrimary:

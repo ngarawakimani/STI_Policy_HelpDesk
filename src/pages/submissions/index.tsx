@@ -11,12 +11,12 @@ import { AppConfig } from "@/utils/AppConfig";
 const SubmissionIndex = () => {
   const { user } = useUser();
   const router = useRouter();
-  if (
-    !user?.unsafeMetadata.data ||
-    user.unsafeMetadata.data === "My Submissions"
-  ) {
-    router.push("/redirecting");
-  }
+  // if (
+  //   !user?.unsafeMetadata.data ||
+  //   user.unsafeMetadata.data === "My Submissions"
+  // ) {
+  //   router.push("/redirecting");
+  // }
   return (
     <Main
       meta={

@@ -1,6 +1,3 @@
-/* eslint-disable no-nested-ternary */
-/* eslint-disable no-console */
-
 import { useUser } from "@clerk/nextjs";
 import { doc, setDoc, updateDoc } from "firebase/firestore";
 import Link from "next/link";
@@ -27,6 +24,7 @@ export default function SignIn({ code }: Props) {
   });
 
   const { user } = useUser();
+  console.log({ user });
   const router = useRouter();
 
   function classNames(...classes: string[]) {

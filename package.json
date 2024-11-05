@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^4.11.3",
+    "@clerk/themes": "^2.1.39",
     "@headlessui/react": "^1.7.12",
     "@heroicons/react": "^2.0.16",
     "@next/font": "^13.2.1",

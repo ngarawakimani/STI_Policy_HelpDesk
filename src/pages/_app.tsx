@@ -3,12 +3,10 @@ import "../styles/global.css";
 
 import { ClerkProvider } from "@clerk/nextjs";
 import { Analytics } from "@vercel/analytics/react";
-import { Flowbite } from "flowbite-react";
 import type { AppProps } from "next/app";
 import localFont from "next/font/local";
 
 import { AuthContextProvider } from "@/lib/auth";
-import { tabTheme } from "@/theme/FlowBite";
 
 const sfPro = localFont({
   src: [
@@ -37,18 +35,12 @@ const sfPro = localFont({
 });
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
-  <ClerkProvider {...pageProps}>
+  <ClerkProvider>
     <AuthContextProvider>
-      <Flowbite
-        theme={{
-          theme: tabTheme,
-        }}
-      >
-        <main className={`${sfPro.variable} font-sans`}>
-          <Component {...pageProps} />
-          <Analytics />
-        </main>
-      </Flowbite>
+      <main className={`${sfPro.variable} font-sans`}>
+        <Component {...pageProps} />
+        <Analytics />
+      </main>
     </AuthContextProvider>
   </ClerkProvider>
 );
