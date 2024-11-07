@@ -71,6 +71,14 @@ export const useResearcher = (uid: any) => {
     researcherError: error,
   };
 };
+export const useUsers = (uid: any) => {
+  const { data, error, isLoading } = useSWR(`/api/users/${uid}`, fetcher);
+  return {
+    userData: data,
+    userLoading: isLoading,
+    userError: error,
+  };
+};
 
 export const FetchBiddedProjects = (uid: any) => {
   const { data, error, isLoading } = useSWR(

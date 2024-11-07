@@ -19,17 +19,18 @@ const ReviewCard = () => {
     const docRef = await addDoc(collection(db, "submissions"), {
       request_title: userData.request_title,
       request_details: userData.request_details,
-      // area_of_expertise: userData.area_of_expertise || "", // Default to empty string
+      // area_of_expertise: userData.area_of_expertise || "",
       sector_focus:
         userData.sector_focus === "Other"
           ? userData.other_sector_focus
           : userData.sector_focus,
       matched: false,
-      // resources: userData.downloadUrls,
+      resources: userData.downloadUrls,
       researcher_id: user?.id,
+      estimated_cost: userData.amount,
       // researcher_name: `${user?.firstName} ${user?.lastName}`,
-      // researcher_profile: user?.profileImageUrl,
-      // researcher_email: user?.primaryEmailAddress?.emailAddress,
+      researcher_profile: user?.profileImageUrl,
+      researcher_email: user?.primaryEmailAddress?.emailAddress,
     });
     console.log(docRef.id);
     router.push("/submissions");

@@ -86,6 +86,41 @@ const TitleDescriptionCard = ({ getDone }: any) => {
                 <hr className="my-8 h-px border-0 bg-gray-200"></hr>
                 <div>
                   <label
+                    htmlFor="amount"
+                    className="block text-base font-medium text-slate-900"
+                  >
+                    Estimated Budget
+                  </label>
+                  <div className="mt-1 flex rounded-2xl shadow-sm">
+                    <span className="hidden items-center rounded-l-2xl border-2 border-r-0 border-slate-300 bg-gray-50 px-3 text-base text-gray-500 md:inline-flex">
+                      Estimated amount $
+                    </span>
+                    <input
+                      type="number"
+                      name="amount"
+                      id="amount"
+                      className="block w-full flex-1 rounded-2xl border-2 border-slate-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-base md:rounded-none md:rounded-r-md"
+                      placeholder=""
+                      value={userData.amount}
+                      style={{ border: error ? "2px solid red" : "" }}
+                      onChange={handleChange}
+                      required
+                    />
+                    {error ? (
+                      <div style={{ color: "red" }}>
+                        This is a required field
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <div className="mt-2 ml-3 text-xs font-normal text-slate-700">
+                    Estimated Budget
+                  </div>
+                </div>
+                <hr className="my-8 h-px border-0 bg-gray-200"></hr>
+                <div>
+                  <label
                     htmlFor="about"
                     className="block text-base font-medium text-slate-900"
                   >

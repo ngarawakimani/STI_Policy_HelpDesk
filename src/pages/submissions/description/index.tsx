@@ -22,6 +22,8 @@ const Index = () => {
     router?.query?.submission_id
   );
 
+  console.log("submissionDetails", submissionDetails);
+
   function handleMatching(): string {
     const expertHref = `/match?request=${router?.query?.submission_id}`;
     return user?.unsafeMetadata.data === "expert"
@@ -91,8 +93,8 @@ const Index = () => {
 
                   <div className="prose-sm cursor-pointer text-sm text-slate-700">
                     <DescriptionCard
-                      details={submissionDetail.request_details}
-                    ></DescriptionCard>
+                      details={submissionDetail?.request_details}
+                    />
                   </div>
                 </div>
                 <div className="border-t py-6">

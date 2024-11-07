@@ -139,7 +139,7 @@ export default function SignIn({ code }: Props) {
                   }}
                 />
                 <label
-                  htmlFor="council"
+                  htmlFor="counselor"
                   className="inline-flex w-full cursor-pointer items-center justify-between rounded-lg border border-slate-300 bg-white p-5 text-gray-500 hover:bg-gray-100 hover:text-gray-600 peer-checked:border-slate-800 peer-checked:bg-gray-100 peer-checked:text-slate-800"
                 >
                   <div className="block">

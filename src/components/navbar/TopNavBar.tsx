@@ -29,9 +29,9 @@ const counselor = [
 const expert = [
   { name: "Work Requests", href: "/submissions", current: true },
   { name: "My Profile", href: "/professional-profile/create", current: true },
-  // { name: "My Bids", href: "/my-bids", current: false },
-  // { name: "Invited Work Requests", href: "/invited-projects", current: false },
-  // { name: "Matched Projects", href: "/project", current: false },
+  { name: "My Bids", href: "/my-bids", current: false },
+  { name: "Invited Work Requests", href: "/invited-projects", current: false },
+  { name: "Matched Projects", href: "/project", current: false },
   { name: "Contact", href: "/contact", current: false },
 ];
 

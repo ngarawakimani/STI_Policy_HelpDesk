@@ -1,6 +1,6 @@
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/router";
-import type { Key } from "react";
+import { type Key, useEffect, useState } from "react";
 
 import { Main } from "@/base/Main";
 import Requirements from "@/components/cards/match/Requirements";
@@ -11,18 +11,57 @@ import ProfileCard from "@/components/profile/ProfileCard";
 import FilePreview from "@/components/resources/FilePreview";
 import CardSkeleton from "@/components/utils/CardSkeleton";
 import Loading from "@/components/utils/Loading";
+import { getResearcher } from "@/database/db";
 import { Meta } from "@/layouts/Meta";
 import { useSubmissionDetails } from "@/model";
 import { AppConfig } from "@/utils/AppConfig";
 
 const Index = () => {
   const router = useRouter();
-
   const { user } = useUser();
+  const [researcherId, setResearcherId] = useState("");
+  const [researcher, setResearcher] = useState<any>(null);
+  const [isResearcherLoading, setIsResearcherLoading] =
+    useState<boolean>(false);
+  const [researcherError, setResearcherError] = useState<string | null>(null);
+
+  console.log(user, router, "user");
 
   const { submissionDetails, isLoading, isError } = useSubmissionDetails(
     router.query.request?.toString() || ""
   );
+  useEffect(() => {
+    if (
+      submissionDetails &&
+      submissionDetails.data &&
+      submissionDetails.data.length > 0
+    ) {
+      setResearcherId(submissionDetails.data[0].researcher_id);
+    }
+  }, [submissionDetails]);
+
+  useEffect(() => {
+    if (researcherId) {
+      setIsResearcherLoading(true);
+      getResearcher(researcherId)
+        .then((response) => {
+          if (response.researcher) {
+            setResearcher(response.researcher);
+          } else {
+            setResearcherError("Failed to fetch researcher data");
+          }
+        })
+        .catch((error) => {
+          setResearcherError(error.message || "An error occurred");
+        })
+        .finally(() => {
+          setIsResearcherLoading(false);
+        });
+    }
+  }, [researcherId]);
+
+  console.log("submissionDetails", submissionDetails);
+  console.log("researcher", researcher);
 
   return (
     <Main
@@ -151,10 +190,11 @@ const Index = () => {
             )}
             {user?.unsafeMetadata.data !== "expert" ? (
               <RequestMailer
-                profileName={router.query.name?.toString() || ""}
+                profileName={router.query.request?.toString() || ""}
                 email={router.query.email?.toString() || ""}
                 request_details={submissionDetails?.data?.[0]?.request_details}
                 request_title={submissionDetails?.data?.[0]?.request_title}
+                researcher_id={submissionDetails?.data?.[0]?.researcher_id}
                 researcher_email={
                   submissionDetails?.data?.[0]?.researcher_email
                 }
@@ -162,10 +202,11 @@ const Index = () => {
               />
             ) : (
               <RequestMailer
-                profileName={user?.fullName || ""}
+                profileName={user?.id || ""}
                 email={user?.primaryEmailAddress?.emailAddress || ""}
                 request_details={submissionDetails?.data?.[0]?.request_details}
                 request_title={submissionDetails?.data?.[0]?.request_title}
+                researcher_id={submissionDetails?.data?.[0]?.researcher_id}
                 researcher_email={
                   submissionDetails?.data?.[0]?.researcher_email
                 }

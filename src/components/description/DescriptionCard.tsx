@@ -7,7 +7,7 @@ interface DataProps {
 }
 
 const DescriptionCard = ({ details }: DataProps) => {
-  const sentences = (details && details.match(/[^.!?]+[.!?]+/g)) || [];
+  const sentences = details ? details.match(/[^.!?]+[.!?]+|[^.!?]+$/g) : [];
   const paragraphs: string[] = [];
 
   let currentParagraph = "";
