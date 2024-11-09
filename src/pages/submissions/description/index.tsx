@@ -83,6 +83,12 @@ const Index = () => {
               parentLink="Home"
               currentLink="Submission Description"
             />
+            <p className="mx-28 text-sm text-indigo-700">
+              Budget:{" "}
+              {submissionDetail.estimated_cost
+                ? `$${submissionDetail.estimated_cost}`
+                : "flexible budget"}
+            </p>
 
             <div className="mt-8 grid grid-cols-4 gap-6 border-t px-20 py-10">
               <div className="col-span-3">

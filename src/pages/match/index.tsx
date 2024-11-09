@@ -6,9 +6,9 @@ import { Main } from "@/base/Main";
 import Requirements from "@/components/cards/match/Requirements";
 import DescriptionCard from "@/components/description/DescriptionCard";
 import ResourcesCard from "@/components/description/ResourcesCard";
-import RequestMailer from "@/components/mailer";
 import ProfileCard from "@/components/profile/ProfileCard";
 import FilePreview from "@/components/resources/FilePreview";
+import RequestTerms from "@/components/terms";
 import CardSkeleton from "@/components/utils/CardSkeleton";
 import Loading from "@/components/utils/Loading";
 import { getResearcher } from "@/database/db";
@@ -188,8 +188,9 @@ const Index = () => {
                 {isLoading && <Loading />}
               </div>
             )}
-            {user?.unsafeMetadata.data !== "expert" ? (
-              <RequestMailer
+
+            {/* {user?.unsafeMetadata.data !== "expert" ? (
+  <RequestMailer
                 profileName={router.query.request?.toString() || ""}
                 email={router.query.email?.toString() || ""}
                 request_details={submissionDetails?.data?.[0]?.request_details}
@@ -200,65 +201,68 @@ const Index = () => {
                 }
                 researcher_name={submissionDetails?.data?.[0]?.researcher_name}
               />
-            ) : (
-              <RequestMailer
-                profileName={user?.id || ""}
-                email={user?.primaryEmailAddress?.emailAddress || ""}
+) : (
+  <RequestMailer
+    profileName={user?.id || ""}
+    email={user?.primaryEmailAddress?.emailAddress || ""}
+    request_details={submissionDetails?.data?.[0]?.request_details}
+    request_title={submissionDetails?.data?.[0]?.request_title}
+    researcher_id={submissionDetails?.data?.[0]?.researcher_id}
+    researcher_email={
+      submissionDetails?.data?.[0]?.researcher_email
+    }
+    researcher_name={submissionDetails?.data?.[0]?.researcher_name}
+  />
+  )} */}
+
+            {user?.unsafeMetadata.data !== "expert" ? (
+              <RequestTerms
+                profileName={router.query.name?.toString() || ""}
+                username={router.query.username?.toString() || ""}
+                email={router.query.email?.toString() || ""}
+                profileUrl={router.query.profileUrl?.toString() || ""}
+                expertId={router.query.expertId?.toString() || ""}
+                area_of_expertise={
+                  submissionDetails?.data?.[0]?.area_of_expertise
+                }
+                matched={submissionDetails?.data?.[0]?.matched}
                 request_details={submissionDetails?.data?.[0]?.request_details}
                 request_title={submissionDetails?.data?.[0]?.request_title}
-                researcher_id={submissionDetails?.data?.[0]?.researcher_id}
                 researcher_email={
                   submissionDetails?.data?.[0]?.researcher_email
                 }
-                researcher_name={submissionDetails?.data?.[0]?.researcher_name}
+                researcher_id={submissionDetails?.data?.[0]?.researcher_id}
+                researcher_name={submissionDetails?.data?.[0]?.researcher_email}
+                researcher_profile={
+                  submissionDetails?.data?.[0]?.researcher_profile
+                }
+                sector_focus={submissionDetails?.data?.[0]?.sector_focus}
+                resources={submissionDetails?.data?.[0]?.resources}
               />
-              // <RequestTerms
-              //   profileName={router.query.name?.toString() || ""}
-              //   username={router.query.username?.toString() || ""}
-              //   email={router.query.email?.toString() || ""}
-              //   profileUrl={router.query.profileUrl?.toString() || ""}
-              //   expertId={router.query.expertId?.toString() || ""}
-              //   area_of_expertise={
-              //     submissionDetails?.data?.[0]?.area_of_expertise
-              //   }
-              //   matched={submissionDetails?.data?.[0]?.matched}
-              //   request_details={submissionDetails?.data?.[0]?.request_details}
-              //   request_title={submissionDetails?.data?.[0]?.request_title}
-              //   researcher_email={
-              //     submissionDetails?.data?.[0]?.researcher_email
-              //   }
-              //   researcher_id={submissionDetails?.data?.[0]?.researcher_id}
-              //   researcher_name={submissionDetails?.data?.[0]?.researcher_name}
-              //   researcher_profile={
-              //     submissionDetails?.data?.[0]?.researcher_profile
-              //   }
-              //   sector_focus={submissionDetails?.data?.[0]?.sector_focus}
-              //   resources={submissionDetails?.data?.[0]?.resources}
-              // />
-
-              // <RequestTerms
-              //   profileName={user?.fullName || ""}
-              //   username={user?.username || ""}
-              //   email={user?.primaryEmailAddress?.emailAddress || ""}
-              //   profileUrl={user?.profileImageUrl || ""}
-              //   expertId={user?.id || ""}
-              //   area_of_expertise={
-              //     submissionDetails?.data?.[0]?.area_of_expertise
-              //   }
-              //   matched={submissionDetails?.data?.[0]?.matched}
-              //   request_details={submissionDetails?.data?.[0]?.request_details}
-              //   request_title={submissionDetails?.data?.[0]?.request_title}
-              //   researcher_email={
-              //     submissionDetails?.data?.[0]?.researcher_email
-              //   }
-              //   researcher_id={submissionDetails?.data?.[0]?.researcher_id}
-              //   researcher_name={submissionDetails?.data?.[0]?.researcher_name}
-              //   researcher_profile={
-              //     submissionDetails?.data?.[0]?.researcher_profile
-              //   }
-              //   sector_focus={submissionDetails?.data?.[0]?.sector_focus}
-              //   resources={submissionDetails?.data?.[0]?.resources}
-              // />
+            ) : (
+              <RequestTerms
+                profileName={user?.fullName || ""}
+                username={user?.username || ""}
+                email={user?.primaryEmailAddress?.emailAddress || ""}
+                profileUrl={user?.profileImageUrl || ""}
+                expertId={user?.id || ""}
+                area_of_expertise={
+                  submissionDetails?.data?.[0]?.area_of_expertise
+                }
+                matched={submissionDetails?.data?.[0]?.matched}
+                request_details={submissionDetails?.data?.[0]?.request_details}
+                request_title={submissionDetails?.data?.[0]?.request_title}
+                researcher_email={
+                  submissionDetails?.data?.[0]?.researcher_email
+                }
+                researcher_id={submissionDetails?.data?.[0]?.researcher_id}
+                researcher_name={submissionDetails?.data?.[0]?.researcher_email}
+                researcher_profile={
+                  submissionDetails?.data?.[0]?.researcher_profile
+                }
+                sector_focus={submissionDetails?.data?.[0]?.sector_focus}
+                resources={submissionDetails?.data?.[0]?.resources}
+              />
             )}
           </div>
         </div>

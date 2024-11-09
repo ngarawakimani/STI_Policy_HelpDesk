@@ -1,7 +1,7 @@
 /* eslint-disable func-names */
 /* eslint-disable object-shorthand */
 import { useUser } from "@clerk/nextjs";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import Link from "next/link";
 import router from "next/router";
 import { useState } from "react";
@@ -42,6 +42,11 @@ const RequestMailer = ({
     setSubmitted(true);
     await addDoc(collection(db, "mail"), {
       to: user?.unsafeMetadata.data !== "expert" ? email : researcher_email,
+      bid: user?.unsafeMetadata.data === "expert",
+      invite: user?.unsafeMetadata.data !== "expert",
+      from: user?.unsafeMetadata.data !== "expert" ? researcher_email : email,
+      // userId:  user?.unsafeMetadata.data !== "expert" ? researcher_id : user?.id,
+      timestamp: serverTimestamp(),
       template: {
         name: "mainTemplate",
         data: {

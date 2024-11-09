@@ -192,6 +192,18 @@ export const getBidDetails = async (id: any) => {
   }
 };
 
+// export const getBidMails = async (id: any) => {
+//   try {
+//     const docRef = doc(db, "mail", id);
+//     const docSnap = await getDoc(docRef);
+//     const bidDetails: any[] = [];
+//     bidDetails.push({ id: docSnap.id, ...docSnap.data() });
+//     return { bidDetails };
+//   } catch (err: any) {
+//     return { err };
+//   }
+// };
+
 export const getUnmatchedProjects = async (researcher_id: unknown) => {
   const q = query(
     collection(db, "submissions"),

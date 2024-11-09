@@ -9,6 +9,8 @@ import CardSkeleton from "../utils/CardSkeleton";
 const AllSubmissions = () => {
   const { submissions, isLoading, isError } = useSubmissions();
 
+  console.log(submissions, "submissions");
+
   return (
     <div className="block gap-4 md:grid md:grid-flow-row-dense md:grid-cols-4 ">
       <div className="col-span-3">

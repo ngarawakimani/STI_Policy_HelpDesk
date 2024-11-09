@@ -101,6 +101,15 @@ export const FetchMyBids = (uid: any) => {
   };
 };
 
+export const FetchBidMails = () => {
+  const { data, error, isLoading } = useSWR(`/api/mail`, fetcher);
+  return {
+    bidsmails: data,
+    mailsLoading: isLoading,
+    mailsError: error,
+  };
+};
+
 export const FetchInvitedProjects = (uid: any) => {
   const { data, error, isLoading } = useSWR(
     `/api/invited-projects/${uid}`,

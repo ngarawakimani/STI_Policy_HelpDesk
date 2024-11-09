@@ -43,6 +43,23 @@ const RequestTerms = ({
   area_of_expertise,
   resources,
 }: Props) => {
+  console.log({
+    profileName,
+    username,
+    email,
+    profileUrl,
+    expertId,
+    sector_focus,
+    researcher_profile,
+    researcher_name,
+    researcher_id,
+    request_title,
+    researcher_email,
+    request_details,
+    matched,
+    area_of_expertise,
+    resources,
+  });
   const [userData, setUserData] = useState({
     cost: "",
     duration: "",
@@ -61,6 +78,7 @@ const RequestTerms = ({
       setDone(true);
     }
   }, [userData]);
+
   const handleInvite = async () => {
     setSubmitted(true);
     if (user?.unsafeMetadata.data === "expert") {
@@ -86,7 +104,7 @@ const RequestTerms = ({
         request_details: request_details,
         resources,
         matched: matched,
-        area_of_expertise: area_of_expertise,
+        // area_of_expertise: area_of_expertise,
       }).then(function () {
         router.push({
           pathname: "/my-bids",
@@ -150,7 +168,7 @@ const RequestTerms = ({
                       <div className="mt-1 flex rounded-md">
                         <div className="flex">
                           <span className="inline-flex items-center rounded-l-md border border-r-0 border-slate-400 bg-gray-200 px-3 text-sm text-gray-900">
-                            Estimated Duration
+                            Estimated Duration (Days)
                           </span>
                         </div>
                         <input

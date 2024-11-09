@@ -21,8 +21,8 @@ const counselor = [
   },
   { name: "Experts Profile", href: "/expert-profile", current: false },
   // { name: "My Invites", href: "/my-invites", current: false },
-  // { name: "Bidded Projects", href: "/bidded-projects", current: false },
-  // { name: "Matched Projects", href: "/project", current: false },
+  { name: "Bidded Projects", href: "/bidded-projects", current: false },
+  { name: "Matched Projects", href: "/project", current: false },
   { name: "Contact", href: "/contact", current: false },
 ];
 

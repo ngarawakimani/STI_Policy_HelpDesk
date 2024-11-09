@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { useUser } from "@clerk/nextjs";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
@@ -25,9 +25,12 @@ const ReviewCard = () => {
           ? userData.other_sector_focus
           : userData.sector_focus,
       matched: false,
+      bid: false,
+      invite: false,
       resources: userData.downloadUrls,
       researcher_id: user?.id,
       estimated_cost: userData.amount,
+      timestamp: serverTimestamp(),
       // researcher_name: `${user?.firstName} ${user?.lastName}`,
       researcher_profile: user?.profileImageUrl,
       researcher_email: user?.primaryEmailAddress?.emailAddress,
