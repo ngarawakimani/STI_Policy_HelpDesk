@@ -141,6 +141,11 @@ const MainCard = ({ submissions, path }: DataProps) => {
                 : "flexible budget"}
             </p>
 
+            <p className="mx-8 text-sm text-indigo-700">
+              Estimated Time (Days):{" "}
+              {feed.aproximate_days ? `${feed.aproximate_days}` : "flexible"}
+            </p>
+
             <div className="mt-3 mb-8 flex w-full">
               <div className="text-primary-500 mx-5 items-center rounded-md text-sm font-normal line-clamp-3 hover:line-clamp-none">
                 {feed.request_details}

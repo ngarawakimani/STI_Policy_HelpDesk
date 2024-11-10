@@ -10,6 +10,8 @@ const InviteList = () => {
   const { user } = useUser();
   const { invites, invitesLoading, invitesError } = FetchMyInvites(user?.id);
 
+  
+
   return (
     <div className="block gap-4 md:grid md:grid-flow-row-dense md:grid-cols-4 ">
       <div className="col-span-3">

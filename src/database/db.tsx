@@ -71,6 +71,24 @@ export const getProjectSubmissions = async (researcher_id: unknown) => {
   }
 };
 
+export const getMatchedSubmissions = async (expert_id: unknown) => {
+  const q = query(
+    collection(db, "submissions"),
+    where("matched", "==", true),
+    where("expert_id", "==", expert_id)
+  );
+  try {
+    const querySnapshot = await getDocs(q);
+    const projectMatched: any[] = [];
+    querySnapshot.forEach((document) => {
+      projectMatched.push({ id: document.id, ...document.data() });
+    });
+    return { projectMatched };
+  } catch (err: any) {
+    return { err };
+  }
+};
+
 export const getUserAccount = async (uid: any) => {
   try {
     const docRef = doc(db, "users", uid);
@@ -154,8 +172,11 @@ export const getMyInvites = async (uid: any) => {
   }
 };
 
-export const getInvitedProjects = async (uid: any) => {
-  const q = query(collection(db, "invites"), where("expert_id", "==", uid));
+export const getInvitedProjects = async (expert_id: any) => {
+  const q = query(
+    collection(db, "invites"),
+    where("expert_id", "==", expert_id)
+  );
   try {
     const querySnapshot = await getDocs(q);
     const fetchInvitedProjects: any[] = [];

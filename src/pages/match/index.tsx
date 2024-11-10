@@ -143,6 +143,19 @@ const Index = () => {
                       <div className="mt-7 mb-2 cursor-pointer text-sm font-medium text-indigo-700">
                         Description
                       </div>
+                      <p className=" text-sm text-indigo-700">
+                        Budget:{" "}
+                        {submissionDetail.estimated_cost
+                          ? `$${submissionDetail.estimated_cost}`
+                          : "flexible budget"}
+                      </p>
+                      <p className="text-sm text-indigo-700">
+                        Estimated Time (Days):{" "}
+                        {submissionDetail.aproximate_days
+                          ? `${submissionDetail.aproximate_days}`
+                          : "flexible"}
+                      </p>
+
                       <div className="prose-sm cursor-pointer text-sm text-slate-700">
                         <DescriptionCard
                           details={submissionDetail.request_details}
@@ -222,9 +235,7 @@ const Index = () => {
                 email={router.query.email?.toString() || ""}
                 profileUrl={router.query.profileUrl?.toString() || ""}
                 expertId={router.query.expertId?.toString() || ""}
-                area_of_expertise={
-                  submissionDetails?.data?.[0]?.area_of_expertise
-                }
+                area_of_expertise={submissionDetails?.data?.[0]?.sector_focus}
                 matched={submissionDetails?.data?.[0]?.matched}
                 request_details={submissionDetails?.data?.[0]?.request_details}
                 request_title={submissionDetails?.data?.[0]?.request_title}
@@ -246,9 +257,7 @@ const Index = () => {
                 email={user?.primaryEmailAddress?.emailAddress || ""}
                 profileUrl={user?.profileImageUrl || ""}
                 expertId={user?.id || ""}
-                area_of_expertise={
-                  submissionDetails?.data?.[0]?.area_of_expertise
-                }
+                area_of_expertise={submissionDetails?.data?.[0]?.sector_focus}
                 matched={submissionDetails?.data?.[0]?.matched}
                 request_details={submissionDetails?.data?.[0]?.request_details}
                 request_title={submissionDetails?.data?.[0]?.request_title}

@@ -3,6 +3,7 @@ import { useUser } from "@clerk/nextjs";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 import { db } from "@/config/firebase";
 
@@ -12,31 +13,45 @@ const ReviewCard = () => {
   const { userData } = useStepperContext();
   const { user } = useUser();
   const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   console.log(userData, "userData");
   console.log(user, "user");
 
+  // const savetoDb = async () => {
+  //
+  //   console.log(docRef.id);
+  //   router.push("/submissions");
+  // };
+
   const savetoDb = async () => {
-    const docRef = await addDoc(collection(db, "submissions"), {
-      request_title: userData.request_title,
-      request_details: userData.request_details,
-      // area_of_expertise: userData.area_of_expertise || "",
-      sector_focus:
-        userData.sector_focus === "Other"
-          ? userData.other_sector_focus
-          : userData.sector_focus,
-      matched: false,
-      bid: false,
-      invite: false,
-      resources: userData.downloadUrls,
-      researcher_id: user?.id,
-      estimated_cost: userData.amount,
-      timestamp: serverTimestamp(),
-      // researcher_name: `${user?.firstName} ${user?.lastName}`,
-      researcher_profile: user?.profileImageUrl,
-      researcher_email: user?.primaryEmailAddress?.emailAddress,
-    });
-    console.log(docRef.id);
-    router.push("/submissions");
+    setIsSubmitting(true); // Set to true when the submission starts
+
+    try {
+      const docRef = await addDoc(collection(db, "submissions"), {
+        request_title: userData.request_title,
+        request_details: userData.request_details,
+        // area_of_expertise: userData.area_of_expertise || "",
+        sector_focus:
+          userData.sector_focus === "Other"
+            ? userData.other_sector_focus
+            : userData.sector_focus,
+        matched: false,
+        resources: userData.downloadUrls,
+        researcher_id: user?.id,
+        estimated_cost: userData.amount,
+        timestamp: serverTimestamp(),
+        aproximate_days: userData.aproximate_days,
+        // researcher_name: `${user?.firstName} ${user?.lastName}`,
+        researcher_profile: user?.profileImageUrl,
+        researcher_email: user?.primaryEmailAddress?.emailAddress,
+      });
+      console.log(docRef.id);
+      router.push("/submissions");
+    } catch (error) {
+      console.error("Error submitting project:", error);
+    } finally {
+      setIsSubmitting(false); // Reset after submission or error
+    }
   };
 
   return (
@@ -168,11 +183,10 @@ const ReviewCard = () => {
               <button
                 type="button"
                 className="mb-2 mr-2 w-full rounded-lg bg-gray-800 px-5 py-2.5 text-base font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300"
-                onClick={() => {
-                  savetoDb();
-                }}
+                onClick={savetoDb}
+                disabled={isSubmitting}
               >
-                Submit Project
+                {isSubmitting ? "Submitting..." : "Submit Project"}
               </button>
             </div>
           </div>

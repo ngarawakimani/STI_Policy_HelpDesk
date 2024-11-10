@@ -8,9 +8,10 @@ interface Props {
   title: string;
   width: string;
   name: any;
+  onClick?: () => void;
 }
 
-const DarkButton = ({ link, title, width, name }: Props) => {
+const DarkButton = ({ link, title, width, name, onClick }: Props) => {
   const [submitted, setSubmitted] = useState(false);
 
   const newLocal =
@@ -22,13 +23,19 @@ const DarkButton = ({ link, title, width, name }: Props) => {
   function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(" ");
   }
+  const handleClick = () => {
+    setSubmitted(true);
+    if (onClick) {
+      onClick();
+    }
+  };
   return (
     <div>
       {title !== "hideButton" && (
         <Link
           href={encodeURI(link)}
           className={`${submitted ? newLocal : newLocal2} ${width}`}
-          onClick={() => setSubmitted(true)}
+          onClick={handleClick}
         >
           <div className={`${submitted ? "hidden" : "block"}`}>
             <HeroIcon name={name} />

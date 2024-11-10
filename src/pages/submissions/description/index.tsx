@@ -89,6 +89,12 @@ const Index = () => {
                 ? `$${submissionDetail.estimated_cost}`
                 : "flexible budget"}
             </p>
+            <p className="mx-28 text-sm text-indigo-700">
+              Estimated Time (Days):{" "}
+              {submissionDetail.aproximate_days
+                ? `${submissionDetail.aproximate_days}`
+                : "flexible"}
+            </p>
 
             <div className="mt-8 grid grid-cols-4 gap-6 border-t px-20 py-10">
               <div className="col-span-3">

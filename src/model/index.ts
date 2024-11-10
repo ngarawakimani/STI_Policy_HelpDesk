@@ -45,6 +45,18 @@ export const useProjectSubmissions = (researcherId: any) => {
   };
 };
 
+export const useMatchedSubmissions = (expertId: any) => {
+  const { data, error, isLoading } = useSWR(
+    `/api/matched-project/${expertId}`,
+    fetcher
+  );
+  return {
+    projectMatched: data,
+    isLoading,
+    isError: error,
+  };
+};
+
 export const useAccount = (uid: any) => {
   const { data, error, isLoading } = useSWR(`/api/account/${uid}`, fetcher);
   return {
@@ -110,9 +122,9 @@ export const FetchBidMails = () => {
   };
 };
 
-export const FetchInvitedProjects = (uid: any) => {
+export const FetchInvitedProjects = (expertId: any) => {
   const { data, error, isLoading } = useSWR(
-    `/api/invited-projects/${uid}`,
+    `/api/invited-projects/${expertId}`,
     fetcher
   );
   return {

@@ -19,35 +19,52 @@ const Index = () => {
   const router = useRouter();
 
   const { user } = useUser();
+  console.log(router, "user");
 
   const { bidDetails, bidDetailsError, bidDetailsLoading } = FetchBidDetails(
     router?.query?.submission_id
   );
-
+  console.log(bidDetails, "bidDetails");
   const updateMatch = async () => {
-    const referenceData = doc(
-      db,
-      "submissions",
-      router.query.project_id?.toString() || ""
-    );
+    if (!router.isReady) {
+      console.warn("Router not ready yet");
+      return;
+    }
 
-    await updateDoc(referenceData, {
-      cost: bidDetails?.data?.[0]?.cost,
-      duration: bidDetails?.data?.[0]?.duration,
-      matched: true,
-      unmatched: false,
-      expert_name: bidDetails?.data?.[0]?.expert_name,
-      expert_profile: bidDetails?.data?.[0]?.expert_profile,
-      expert_email: bidDetails?.data?.[0]?.expert_email,
-      expert_id: bidDetails?.data?.[0]?.expert_id,
-      expert_username: bidDetails?.data?.[0]?.expert_username,
-    });
+    const projectId = router?.query?.project_id?.toString();
+
+    if (typeof projectId !== "string") {
+      console.error("Invalid project ID");
+      return;
+    }
+
+    const referenceData = doc(db, "submissions", projectId);
+
+    try {
+      await updateDoc(referenceData, {
+        cost: bidDetails?.data?.[0]?.cost,
+        duration: bidDetails?.data?.[0]?.duration,
+        matched: true,
+        unmatched: false,
+        expert_name: bidDetails?.data?.[0]?.expert_email,
+        expert_email: bidDetails?.data?.[0]?.expert_email,
+        expert_id: bidDetails?.data?.[0]?.expert_id,
+      });
+      console.log("Document updated successfully.");
+    } catch (error) {
+      console.error("Error updating document:", error);
+    }
   };
 
-  function handleMatching(): string {
-    updateMatch();
-    return "";
+  async function handleMatching(): Promise<string> {
+    await updateMatch();
+    const success = await router.push("/project");
+    if (success) {
+      return "Matched with expert successfully!";
+    }
+    return "Navigation failed.";
   }
+
 
   return (
     <Main
@@ -80,10 +97,22 @@ const Index = () => {
                   ? "DocumentArrowDownIcon"
                   : "XCircleIcon"
               }
+              // darkButtonLink={
+              //   user?.unsafeMetadata.data !== "expert"
+              //     ? "/project"
+              //     : `/my-bids/cancel-bid?id=${submissionDetail.id}`
+              // }
+              // darkButtonClick={() => handleMatching(submissionDetail)}
               darkButtonLink={
                 user?.unsafeMetadata.data !== "expert"
-                  ? handleMatching()
+                  ? ""
                   : `/my-bids/cancel-bid?id=${submissionDetail.id}`
+              }
+              // Inline arrow function to handleMatching
+              darkButtonClick={
+                user?.unsafeMetadata.data !== "expert"
+                  ? () => handleMatching()
+                  : undefined
               }
               darkButtonTitle={
                 user?.unsafeMetadata.data !== "expert"
@@ -138,7 +167,7 @@ const Index = () => {
                     type="button"
                     className="mr-2 rounded-full border border-slate-200 bg-gray-100 py-[6px] px-5 text-xs text-slate-600 hover:bg-slate-100 hover:text-blue-800"
                   >
-                    {submissionDetail.area_of_expertise}
+                    {submissionDetail.sector_focus}
                   </button>
                 </div>
               </div>

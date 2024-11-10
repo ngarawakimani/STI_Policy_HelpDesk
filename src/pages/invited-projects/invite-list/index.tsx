@@ -12,6 +12,8 @@ const InviteList = () => {
     user?.id
   );
 
+  console.log("invited", invited);
+
   return (
     <div className="block gap-4 md:grid md:grid-flow-row-dense md:grid-cols-4 ">
       <div className="col-span-3">

@@ -12,11 +12,12 @@ interface Props {
   darkButtonLink: string;
   darkButtonTitle: string;
   darkButtonIcon: string;
-  lightButtonLink: string;
+  lightButtonLink?: string;
   lightButtonTitle: string;
   lightButtonIcon: string;
   parentLink: string;
   currentLink: string;
+  darkButtonClick?: () => void;
 }
 
 const BreadCrumbHeader = ({
@@ -29,6 +30,7 @@ const BreadCrumbHeader = ({
   lightButtonTitle,
   lightButtonIcon,
   parentLink,
+  darkButtonClick,
   currentLink,
 }: Props) => {
   const [isSticky, setIsSticky] = useState(false);
@@ -100,6 +102,7 @@ const BreadCrumbHeader = ({
             ""
           ) : (
             <DarkButton
+              onClick={darkButtonClick}
               link={darkButtonLink}
               title={darkButtonTitle}
               width="w-full"
