@@ -4,9 +4,6 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 
 module.exports = withBundleAnalyzer({
-  images: {
-    unoptimized: true,  // Disable image optimization for static export
-  },
   output: 'export',
   eslint: {
     dirs: ["."],
@@ -14,6 +11,7 @@ module.exports = withBundleAnalyzer({
   },
   images: {
     domains: ["images.clerk.dev", "www.gravatar.com"],
+    unoptimized: true,
   },
   poweredByHeader: false,
   trailingSlash: true,
