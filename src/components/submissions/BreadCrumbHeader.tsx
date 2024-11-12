@@ -12,7 +12,7 @@ interface Props {
   darkButtonLink: string;
   darkButtonTitle: string;
   darkButtonIcon: string;
-  lightButtonLink?: string;
+  lightButtonLink: string;
   lightButtonTitle: string;
   lightButtonIcon: string;
   parentLink: string;

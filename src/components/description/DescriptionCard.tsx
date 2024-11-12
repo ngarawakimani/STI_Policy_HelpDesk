@@ -11,18 +11,19 @@ const DescriptionCard = ({ details }: DataProps) => {
   const paragraphs: string[] = [];
 
   let currentParagraph = "";
-  for (let i = 0; i < sentences.length; i++) {
-    const sentence = sentences[i]?.trim();
-
-    if (sentence) {
-      if (
-        currentParagraph.split(" ").length + sentence.split(" ").length <=
-        50
-      ) {
-        currentParagraph += ` ${sentence}`;
-      } else {
-        paragraphs.push(currentParagraph.trim());
-        currentParagraph = sentence;
+  if (sentences) {
+    for (let i = 0; i < sentences.length; i++) {
+      const sentence = sentences[i]?.trim();
+      if (sentence) {
+        if (
+          currentParagraph.split(" ").length + sentence.split(" ").length <=
+          50
+        ) {
+          currentParagraph += ` ${sentence}`;
+        } else {
+          paragraphs.push(currentParagraph.trim());
+          currentParagraph = sentence;
+        }
       }
     }
   }

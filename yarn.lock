@@ -1451,6 +1451,11 @@
   dependencies:
     webpack-bundle-analyzer "4.7.0"
 
+"@next/env@^15.0.3":
+  version "15.0.3"
+  resolved "https://registry.npmjs.org/@next/env/-/env-15.0.3.tgz"
+  integrity sha512-t9Xy32pjNOvVn2AS+Utt6VmyrshbpfUMhIjFO60gI58deSo/KgLOp31XZ4O+kY/Is8WAGYwA5gR7kOb1eORDBA==
+
 "@next/env@13.5.7":
   version "13.5.7"
   resolved "https://registry.npmjs.org/@next/env/-/env-13.5.7.tgz"
@@ -1468,10 +1473,15 @@
   resolved "https://registry.npmjs.org/@next/font/-/font-13.2.1.tgz"
   integrity sha512-4sergLt7xp9+mZuKME/xM4tLlHGTcmL7naCq0qCTcAlof6NnttshYgiLOdhSiy0NcI+/yM3BjvdEk++O96UzTg==
 
-"@next/swc-win32-x64-msvc@13.5.7":
+"@next/swc-linux-x64-gnu@13.5.7":
   version "13.5.7"
-  resolved "https://registry.npmjs.org/@next/swc-win32-x64-msvc/-/swc-win32-x64-msvc-13.5.7.tgz"
-  integrity sha512-PLyD3Dl6jTTkLG8AoqhPGd5pXtSs8wbqIhWPQt3yEMfnYld/dGYuF2YPs3YHaVFrijCIF9pXY3+QOyvP23Zn7g==
+  resolved "https://registry.npmjs.org/@next/swc-linux-x64-gnu/-/swc-linux-x64-gnu-13.5.7.tgz"
+  integrity sha512-UdHm7AlxIbdRdMsK32cH0EOX4OmzAZ4Xm+UVlS0YdvwLkI3pb7AoBEoVMG5H0Wj6Wpz6GNkrFguHTRLymTy6kw==
+
+"@next/swc-linux-x64-musl@13.5.7":
+  version "13.5.7"
+  resolved "https://registry.npmjs.org/@next/swc-linux-x64-musl/-/swc-linux-x64-musl-13.5.7.tgz"
+  integrity sha512-c50Y8xBKU16ZGj038H6C13iedRglxvdQHD/1BOtes56gwUrIRDX2Nkzn3mYtpz3Wzax0gfAF9C0Nqljt93IxvA==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
