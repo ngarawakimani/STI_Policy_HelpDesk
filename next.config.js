@@ -4,6 +4,10 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 
 module.exports = withBundleAnalyzer({
+  images: {
+    unoptimized: true,  // Disable image optimization for static export
+  },
+  output: 'export',
   eslint: {
     dirs: ["."],
     ignoreDuringBuilds: true,
